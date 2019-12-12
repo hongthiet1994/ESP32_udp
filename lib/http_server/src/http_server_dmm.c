@@ -76,12 +76,11 @@ esp_err_t scanwifi_handler_post(httpd_req_t *req)
     memset(wifi_config_sta.sta.ssid,0,LEN_BUFFER_SSID);
     memset(wifi_config_sta.sta.password,0,LEN_BUFFER_PASS);  
     if((len_ssid >1) && (len_password>1) && (len_password<LEN_BUFFER_PASS))
-    {
+    {         
         httpd_req_get_hdr_value_str(req, "SSID",(char*)wifi_config_sta.sta.ssid, len_ssid);
         httpd_req_get_hdr_value_str(req, "PASSWORD",(char*)wifi_config_sta.sta.password, len_password); 
         httpd_req_get_hdr_value_str(req, "DEVICEID",(char*)wifi_config_ap.ap.ssid, len_deviceid); 
-
-        httpd_resp_send(req, HTML_WIFI_CONNECTED, strlen(HTML_WIFI_CONNECTED));   
+        httpd_resp_send(req, HTML_WIFI_CONNECTED, strlen(HTML_WIFI_CONNECTED));  
         ESP_LOGI(WIFI_DEBUG, "SSID: %s ",wifi_config_sta.sta.ssid);                
         ESP_LOGI(WIFI_DEBUG, "PASSWORD: %s ",wifi_config_sta.sta.password);          
         nvs_set_str_dmm(FIELD_SSID_STA,(char*) wifi_config_sta.sta.ssid);
